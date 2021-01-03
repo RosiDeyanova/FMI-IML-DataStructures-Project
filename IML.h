@@ -7,53 +7,64 @@
 #include <stack>
 using namespace std;
 
-void ReadFromConsole();
-void FindOpenTags(string inputCommands) {
 
-    //finds the open tags and adds them to a stack
+void DoStuff(string input) {
+
+   
 
     stack<string>commands;
-    char command;
-    int counter1 = 0;
-    int removeFromCounter = 0;
-    bool isCounterResetNeeded = true;
+    stack<string>numbers;
+    int counterForFindingCommands = 0;
+    int counterForFindingNumbers = 0;
+    int CounterForClosingCommands = 0;
 
-    for (size_t i = 0; i < inputCommands.length()-1; i++)
+    for (size_t i = 0; i < input.length()-1; i++)
     {
         string temp;
-        int startIndex = 0;
-        if (isCounterResetNeeded)
+        string num;
+        int startIndex = 0; 
+        startIndex = i + 1;
+
+        if (input[i] == '<' && input[i + 1] != '/')  //finds the open tags and adds them to a stack
         {
-            counter1 = 0;
-        }
-
-
-
-        if (inputCommands[i] == '<' && inputCommands[i + 1] != '/')
-        {
-            startIndex = i;
-
-            while (inputCommands[i + 1] != '>')
+           while (input[i + 1] != '>')
             {
-                counter1++; i++;
+                counterForFindingCommands++; i++;
             }
-
-            temp = inputCommands.substr(startIndex + 1, counter1 - removeFromCounter);
-            inputCommands.erase(0, counter1 + 1);
-            i = -1;
+            temp = input.substr(startIndex, counterForFindingCommands);
             commands.push(temp);
-            if (inputCommands[0] == '>')
+            counterForFindingCommands = 0;
+        }
+      
+        else if (input[i] == '>' && input[i + 1] != '<') // gets the numbers and puts the in a stack
+        {  
+            while (input[i + 1] != '>' && input[i + 1] != '<')
             {
-                inputCommands.erase(inputCommands.begin());
-                isCounterResetNeeded = true;
+                counterForFindingNumbers++; i++;
             }
 
+            temp = input.substr(startIndex, counterForFindingNumbers);
+            numbers.push(temp);
+            counterForFindingNumbers = 0;
+
         }
-        else
+        else if (input[i]=='<' && input [i+1]=='/') //checking if the tags are written correctly and what are they
         {
-            counter1++;
-            removeFromCounter++;
-            isCounterResetNeeded = false;
+           while (input[i+1]!='>')
+            {
+                CounterForClosingCommands++; i++;
+            }
+           temp = input.substr(startIndex, CounterForClosingCommands);
+           CounterForClosingCommands = 0;
+
+           if (temp==commands.top())
+           {
+
+           }
+           else
+           {
+               //print out "Wrong tag format"
+           }
         }
 
 
@@ -63,3 +74,4 @@ void FindOpenTags(string inputCommands) {
 
 
 };
+
