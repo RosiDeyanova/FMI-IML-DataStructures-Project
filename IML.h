@@ -10,8 +10,6 @@ using namespace std;
 
 void DoStuff(string input) {
 
-   
-
     stack<string>commands;
     stack<string>numbers;
     int counterForFindingCommands = 0;
@@ -66,13 +64,15 @@ void DoStuff(string input) {
 
            if (temp==commands.top())
            {
+               string newstr;
+               int numbersArray[/*sizeof(newstr)*/50];
                while (!numbers.empty())
                {
                    num = numbers.top();
                    numbers.pop();
-                   string newstr = num;
+                   newstr = num;
                    newstr.erase(remove(newstr.begin(), newstr.end(), ' '), newstr.end());
-                   int numbersArray[/*sizeof(newstr)*/50]; //makes an array that has as many elements as there are numbers
+                   //int numbersArray[/*sizeof(newstr)*/50]; //makes an array that has as many elements as there are numbers
                    while (!num.empty())
                    {
                        if (num[k] != ' ' && num[k + 1] != ' ' && num[k + 1] != '/0')
@@ -85,9 +85,26 @@ void DoStuff(string input) {
                        arrayCount++;
                        counterDigits = 1;
 
-                   }
-                   
+                   }                   
 
+               }
+               for (size_t i = 0; i < input.length(); i++)
+               {
+                   if (true)
+                   {
+
+                   }
+               }
+               string result;
+               if (temp=="AGG-SUM")
+               {
+                   int sum = 0;
+                   for (size_t i = 0; i <newstr.length() ; i++)
+                   {
+                       sum += numbersArray[i];
+                   }
+                   result = to_string(sum);
+                   numbers.push(result);
                }
                
 
