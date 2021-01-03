@@ -50,7 +50,7 @@ void DoStuff(string input) {
         }
         else if (input[i]=='<' && input [i+1]=='/') //checking if the tags are written correctly and what are they
         {
-            int numbersArray[50];
+           
             int k = 0;
             int arrayCount=0;
             int counterDigits = 1;
@@ -70,20 +70,23 @@ void DoStuff(string input) {
                {
                    num = numbers.top();
                    numbers.pop();
-
+                   string newstr = num;
+                   newstr.erase(remove(newstr.begin(), newstr.end(), ' '), newstr.end());
+                   int numbersArray[/*sizeof(newstr)*/50]; //makes an array that has as many elements as there are numbers
                    while (!num.empty())
                    {
-                       if (num[k]!=' ' && num[k+1]!=' ' && num[k+1]!='/0')
+                       if (num[k] != ' ' && num[k + 1] != ' ' && num[k + 1] != '/0')
                        {
-                           counterDigits++; 
+                           counterDigits++;
                        }
                        singleNum = num.substr(k, counterDigits);
                        numbersArray[arrayCount] = stoi(singleNum);
-                       num.erase(k, counterDigits);
+                       num.erase(k, counterDigits + 1);
                        arrayCount++;
                        counterDigits = 1;
-                       k+=2;
+
                    }
+                   
 
                }
                
