@@ -9,7 +9,7 @@ using namespace std;
 
 int main()
 {
-   string input = "<SRT-DST><SRT-SLC \"3\">57 18 9<MAP-INC \"-3\">4 2 2</MAP-INC>5</SRT-SLC></SRT-DST>" ;
+   string input = "<SRT-DST><AGG-AVG>57 18 9<AGG-SUM>4 2 2</AGG-SUM>5</AGG-AVG></SRT-DST>" ;
 
 
    DoStuff(input);

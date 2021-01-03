@@ -22,12 +22,12 @@ void DoStuff(string input) {
     {
         string temp;
         string num;
-        int startIndex = 0; 
+        int startIndex = 0;
         startIndex = i + 1;
 
         if (input[i] == '<' && input[i + 1] != '/')  //finds the open tags and adds them to a stack
         {
-           while (input[i + 1] != '>')
+            while (input[i + 1] != '>')
             {
                 counterForFindingCommands++; i++;
             }
@@ -35,9 +35,9 @@ void DoStuff(string input) {
             commands.push(temp);
             counterForFindingCommands = 0;
         }
-      
+
         else if (input[i] == '>' && input[i + 1] != '<') // gets the numbers and puts the in a stack
-        {  
+        {
             while (input[i + 1] != '>' && input[i + 1] != '<')
             {
                 counterForFindingNumbers++; i++;
@@ -50,15 +50,43 @@ void DoStuff(string input) {
         }
         else if (input[i]=='<' && input [i+1]=='/') //checking if the tags are written correctly and what are they
         {
+            int numbersArray[50];
+            int k = 0;
+            int arrayCount=0;
+            int counterDigits = 1;
+            string num;
+            string singleNum;
+
            while (input[i+1]!='>')
             {
                 CounterForClosingCommands++; i++;
             }
-           temp = input.substr(startIndex, CounterForClosingCommands);
+           temp = input.substr(startIndex+1, CounterForClosingCommands-1);
            CounterForClosingCommands = 0;
 
            if (temp==commands.top())
            {
+               while (!numbers.empty())
+               {
+                   num = numbers.top();
+                   numbers.pop();
+
+                   while (!num.empty())
+                   {
+                       if (num[k]!=' ' && num[k+1]!=' ' && num[k+1]!='/0')
+                       {
+                           counterDigits++; 
+                       }
+                       singleNum = num.substr(k, counterDigits);
+                       numbersArray[arrayCount] = stoi(singleNum);
+                       num.erase(k, counterDigits);
+                       arrayCount++;
+                       counterDigits = 1;
+                       k+=2;
+                   }
+
+               }
+               
 
            }
            else
