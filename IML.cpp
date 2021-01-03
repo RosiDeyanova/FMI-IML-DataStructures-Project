@@ -9,70 +9,43 @@ using namespace std;
 
 int main()
 {
-    //string str = "102:330:3133:76531:451:000:12:44412";
-    //std::replace(str.begin(), str.end(), ':', ' ');  // replace ':' by ' '
-
-    //vector<int> array;
-    //stringstream ss(string);
-    //int temp;
-    //while (ss >> temp)
-    //    array.push_back(temp);
-
-    string input = "<SRT-DST><SRT-SLC \"3\">57 18 9<MAP-INC \"-3\">4 2 2</MAP-INC>5</SRT-SLC></SRT-DST>" ;
-    
-    stack<string>commands;
-    stack<string>numbers;
-    char command;
-    
-   
-   
-    
-    int counter = 0;
-    int removeFromCounter = 0;
-    bool isCounterResetNeeded = true;
-
-    for (size_t i = 0; i < input.capacity(); i++)
-    {
-        string temp;
-        int startIndex = 0;
-        if (isCounterResetNeeded)
-        {
-            counter = 0;
-        }
-      
+   string inputGetCommands = "<SRT-DST><SRT-SLC \"3\">57 18 9<MAP-INC \"-3\">4 2 2</MAP-INC>5</SRT-SLC></SRT-DST>" ;
+   string input = inputGetCommands;
+  
 
 
-        if (input[i]=='<' && input[i+1]!='/')
-        {
-            startIndex = i;
-           
-            while (input[i+1]!='>')
-            {
-                counter++; i++;
-            }
+   FindOpenTags(inputGetCommands);
 
-            temp = input.substr(startIndex+1, counter-removeFromCounter);
-            input.erase(0, counter+1);
-            i = -1;
+   int counter = 0;
+   string temp;
+   int startIndex=0;
+   stack<string>numbers;
+   for (size_t i = 0; i < input.length()-1; i++)
+   {
+       if (input[i] == '>' && input[i + 1] != '<') // gets the numbers and puts the in a stack
+       {
+           startIndex = i+1;
 
-            commands.push(temp);
-            if (input[0]=='>')
-            {
-                input.erase(input.begin());
-                isCounterResetNeeded = true;
-            }
-           
-        }
-        else 
-        {
-            counter++;
-            removeFromCounter++;
-            isCounterResetNeeded = false;
-        }
+           while (input[i + 1] != '>' && input[i + 1] != '<')
+           {
+               counter++; i++;
+           }
 
-        
+           temp = input.substr(startIndex, counter);           
+           numbers.push(temp);
+           counter = 0;
+          
 
-    }
+       }
+       else if (input[i]=='<' && input [i+1]=='/')
+       {
+           string lastCom;
+       }
+	   
+   }
+
+
+
 
     
 }
