@@ -1,3 +1,64 @@
 ﻿  IML.cpp
-C:\Users\Rosi Deyanova\source\repos\IML\IML\IML.h(83,17): warning C4101: 'attributeINT': unreferenced local variable
-  IML.vcxproj -> C:\Users\Rosi Deyanova\source\repos\IML\Debug\IML.exe
+C:\Users\Rosi Deyanova\source\repos\IML\IML\IML.cpp(4,10): fatal error C1083: Cannot open include file: 'IML.h': No such file or directory
+  Parser.cpp
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.h(35,28): error C2065: 'input': undeclared identifier
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.h(42,13): error C2065: 'input': undeclared identifier
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.h(42,32): error C2065: 'input': undeclared identifier
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.h(44,20): error C2065: 'input': undeclared identifier
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.h(48,20): error C2065: 'input': undeclared identifier
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.h(49,13): error C2065: 'commands': undeclared identifier
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.h(51,13): error C2065: 'lastCommandOpenning': undeclared identifier
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.h(54,18): error C2065: 'input': undeclared identifier
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.h(54,37): error C2065: 'input': undeclared identifier
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.h(56,20): error C2065: 'input': undeclared identifier
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.h(56,43): error C2065: 'input': undeclared identifier
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.h(61,20): error C2065: 'input': undeclared identifier
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.h(63,17): error C2065: 'lastCommandOpenning': undeclared identifier
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.h(65,17): error C2065: 'numbers': undeclared identifier
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.h(68,21): error C2065: 'numbers': undeclared identifier
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.h(69,21): error C2065: 'numbers': undeclared identifier
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.h(72,21): error C2065: 'numbers': undeclared identifier
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.h(78,18): error C2065: 'input': undeclared identifier
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.h(78,37): error C2065: 'input': undeclared identifier
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.h(87,20): error C2065: 'input': undeclared identifier
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.h(91,20): error C2065: 'input': undeclared identifier
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.h(98,33): error C2065: 'commands': undeclared identifier
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.h(115,21): error C2065: 'commands': undeclared identifier
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.h(115,59): error C2065: 'commands': undeclared identifier
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.h(125,25): error C2065: 'commands': undeclared identifier
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.h(127,33): error C2065: 'numbers': undeclared identifier
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.h(137,23): error C2065: 'numbers': undeclared identifier
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.h(163,21): error C2065: 'numbers': undeclared identifier
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.h(165,25): error C2065: 'numbers': undeclared identifier
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.h(167,25): error C2065: 'numbers': undeclared identifier
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.h(169,21): error C2065: 'numbers': undeclared identifier
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.h(170,21): error C2065: 'commands': undeclared identifier
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.h(181,21): error C2065: 'numbers': undeclared identifier
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.h(183,25): error C2065: 'numbers': undeclared identifier
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.h(185,25): error C2065: 'numbers': undeclared identifier
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.h(187,21): error C2065: 'numbers': undeclared identifier
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.h(188,21): error C2065: 'commands': undeclared identifier
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.h(201,21): error C2065: 'numbers': undeclared identifier
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.h(203,25): error C2065: 'numbers': undeclared identifier
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.h(205,25): error C2065: 'numbers': undeclared identifier
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.h(207,21): error C2065: 'numbers': undeclared identifier
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.h(208,21): error C2065: 'commands': undeclared identifier
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.h(213,21): error C2065: 'numbers': undeclared identifier
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.h(215,25): error C2065: 'numbers': undeclared identifier
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.h(217,25): error C2065: 'numbers': undeclared identifier
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.h(219,21): error C2065: 'numbers': undeclared identifier
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.h(220,21): error C2065: 'commands': undeclared identifier
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.h(247,21): error C2065: 'numbers': undeclared identifier
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.h(250,25): error C2065: 'numbers': undeclared identifier
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.h(252,25): error C2065: 'numbers': undeclared identifier
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.h(254,28): error C2065: 'numbers': undeclared identifier
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.h(255,21): error C2065: 'commands': undeclared identifier
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.h(270,17): error C2065: 'numbers': undeclared identifier
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.h(273,21): error C2065: 'numbers': undeclared identifier
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.h(275,21): error C2065: 'numbers': undeclared identifier
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.h(277,17): error C2065: 'numbers': undeclared identifier
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.h(278,17): error C2065: 'commands': undeclared identifier
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.h(281,17): error C2065: 'lastCommandOpenning': undeclared identifier
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.h(285,17): error C2065: 'lastCommandOpenning': undeclared identifier
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.h(293,17): error C2065: 'numbers': undeclared identifier
+  Generating Code...
