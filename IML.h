@@ -75,7 +75,38 @@ void DoStuff(string input) {
                 CounterForClosingCommands++; i++;
             }
             temp = input.substr(startIndex + 1, CounterForClosingCommands - 1);
+          
             CounterForClosingCommands = 0;
+            int counterForAttrubutes = 0;
+            int startingIndexForAttributes = 0;
+            string attribute;
+            int attributeINT;
+            string commandTop = commands.top();
+            bool needsToBreak = false;
+
+
+            for (size_t i = 0; i < commandTop.size(); i++)
+            {
+                if (commandTop[i] == '"')
+                {
+                    startingIndexForAttributes = i + 1;
+                   while (commandTop[i + 1] != '"')
+                    {
+                        counterForAttrubutes++;
+                        i++;
+                        needsToBreak = true;
+                    }
+                  
+                    attribute = commandTop.substr(startingIndexForAttributes, counterForAttrubutes);
+                    commands.top() = commandTop.substr(0, commands.top().size() - 3 - counterForAttrubutes);
+                    //attributeINT = stoi(attribute);
+                    if (needsToBreak == true)
+                    {
+                        break;
+                    }
+                }
+            }
+           
 
             if (temp == commands.top())
             {
@@ -103,8 +134,7 @@ void DoStuff(string input) {
                     arrayCount++;
                     counterDigits = 1;
 
-                }
-
+                }        
                 string result;
 
                 if (temp == "AGG-SUM")
@@ -163,7 +193,7 @@ void DoStuff(string input) {
                     numbers.top() += " " + result;
                     commands.pop();
                 }
-                else if (temp == "<AGG-FST>")
+                else if (temp == "AGG-FST")
                 {
                     result = to_string(numbersArray[0]);
                     numbers.pop();
@@ -175,7 +205,7 @@ void DoStuff(string input) {
                     numbers.top() += " " + result;
                     commands.pop();
                 }
-                else if (temp == "<SRT-DST>")
+                else if (temp == "SRT-DST")
                 {
                     if (numbersArray.size()>1)
                     {
