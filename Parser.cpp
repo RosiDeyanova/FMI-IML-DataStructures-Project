@@ -254,12 +254,14 @@ void Parser::lexer()
     int counterForFindingNumbers = 0;
     int CounterForClosingCommands = 0;
     unsigned inputSize = input.length();
+    string temp;
+    string num;
 
 
     for (size_t i = 0; i < inputSize - 1; i++)
     {
-        string temp;
-        string num;
+        temp = "";
+        num = "";
         int startIndex = 0;
         startIndex = i + 1;
 
@@ -313,6 +315,9 @@ void Parser::lexer()
                 CounterForClosingCommands++; i++;
             }
             temp = input.substr(startIndex + 1, CounterForClosingCommands - 1);
+            CounterForClosingCommands = 0;
+            calculate(temp);
         }
     }
+    
 }
