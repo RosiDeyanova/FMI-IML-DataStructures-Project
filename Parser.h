@@ -13,7 +13,7 @@ private:
     stack<string>numbers;
     bool lastCommandOpenning;
     string input;
-    void calculate(const string& temp,int isThereError);
+    void calculate(const string& temp);
    
 public:
     Parser();
