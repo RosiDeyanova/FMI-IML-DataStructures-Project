@@ -1,15 +1,32 @@
-﻿  Parser.cpp
-C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(77,23): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(106,24): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(154,25): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(165,25): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(177,25): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(201,25): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(217,14): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(232,25): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(241,25): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(252,25): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(270,25): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(281,21): warning C4018: '>': signed/unsigned mismatch
-C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(288,25): warning C4018: '<': signed/unsigned mismatch
-  IML.vcxproj -> C:\Users\Rosi Deyanova\source\repos\IML\Debug\IML.exe
+﻿  IML.cpp
+  Parser.cpp
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(64,24): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(75,24): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(87,24): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(111,24): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(127,13): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(142,24): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(156,5): error C2561: 'applyCommand': function must return a value
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(58): message : see declaration of 'applyCommand'
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(161,24): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(177,4): error C2561: 'applyCommand': function must return a value
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(58): message : see declaration of 'applyCommand'
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(181,24): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(203,4): error C2561: 'applyCommand': function must return a value
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(58): message : see declaration of 'applyCommand'
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(205,24): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(221,4): error C2561: 'applyCommand': function must return a value
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(58): message : see declaration of 'applyCommand'
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(225,20): warning C4018: '>': signed/unsigned mismatch
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(229,4): error C2561: 'applyCommand': function must return a value
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(58): message : see declaration of 'applyCommand'
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(233,24): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(246,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(268,5): error C2561: 'addNumsToVector': function must return a value
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(242): message : see declaration of 'addNumsToVector'
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(271,24): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(277,11): error C2561: 'addNumsToVector': function must return a value
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(242): message : see declaration of 'addNumsToVector'
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(305,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(333,9): warning C4834: discarding return value of function with 'nodiscard' attribute
+  Generating Code...
