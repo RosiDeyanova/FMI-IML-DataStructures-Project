@@ -1,12 +1,11 @@
 ﻿#include "Parser.h"
-int isThereError = 0;
 
 Parser::Parser()
 {
 	lastCommandOpenning = false;
+	isThereError = 0;
 
 }
-
 bool Parser::read(const string& filename)
 {
 	ifstream fin(filename);
@@ -26,7 +25,19 @@ bool Parser::read(const string& filename)
 	fin.close();
 	return true;
 }
-
+bool errorCheck(int isThereError) {
+	switch (isThereError)
+	{
+	case 1:cout << "Syntax error \nTry different input"; exit(0); break;
+	case 2:cout << "No letters allowed between the tags \nTry different input"; exit(0); break;
+	case 3: cout << "Number incorrect \nTry different input"; exit(0); break;
+	case 4:cout << "Not enough numbers for the tag \nTry different input"; exit(0); break;
+	case 5:break;
+	case 6:cout << "Incorrect attribute \nTry different input"; exit(0); break;
+	default: return true;
+		break;
+	}
+}
 bool Parser::write(const string& filename) const
 {
 	ofstream fout(filename);
@@ -57,7 +68,6 @@ int countDigits(std::string line)
 	}
 	return count;
 }
-
 string applyCommand(vector<int>numbersArray, string temp, string attribute, int attributeINT, string result, int isThereError)
 {
 	int numbersArraySize = numbersArray.size();
@@ -227,14 +237,16 @@ vector<int> addNumsToVector(stack <string>numbers, int counterDigits, string sin
 		counterDigits = countDigits(num);
 		singleNum = num.substr(0, counterDigits);
 		int singleNumSize = singleNum.size();
-	/*	if (singleNumSize > 0)
+		if (singleNumSize > 0)
 		{
 			if (singleNum[0] == '0')
 			{
-				cout << "Invalid number!";
-				return;
+				isThereError = 3;
+				errorCheck(isThereError);
+				
 			}
-		}*/
+		
+		}
 		//for (size_t i = 0; i < singleNumSize; i++)
 		//{
 		//    /*if (!(singleNum[i]>='0' && singleNum[i]<='9'))
@@ -252,8 +264,7 @@ vector<int> addNumsToVector(stack <string>numbers, int counterDigits, string sin
 	}
 	return numbersArray;
 }
-
-	void Parser::calculate(const string& temp)
+void Parser::calculate(const string& temp)
 	{
 		int CounterForClosingCommands = 0;
 		int counterForAttrubutes = 0;
@@ -338,10 +349,6 @@ vector<int> addNumsToVector(stack <string>numbers, int counterDigits, string sin
 			lastCommandOpenning = false;
 		}
 	}
-
-
-
-
 void Parser::lexer()
 {
 

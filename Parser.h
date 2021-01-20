@@ -12,6 +12,7 @@ private:
     stack<string>commands;
     stack<string>numbers;
     bool lastCommandOpenning;
+    int isThereError;
     string input;
     void calculate(const string& temp);
 
