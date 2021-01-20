@@ -59,7 +59,7 @@ int countDigits(std::string line)
 	for (char i : line) {
 
 
-		if ((i >= '0' && i <= '9') || i == '-') {
+		if (i !=' ') {
 			count++;
 		}
 		else {
@@ -160,7 +160,28 @@ string applyCommand(vector<int>numbersArray, string temp, string attribute, int 
 	}
 	else if (temp == "MAP-INC")
 	{
+		for (size_t i = 0; i < attribute.size(); i++)
+		{
+			if (attribute[i] == '-')
+			{
+				continue;
+				if (!(attribute[i] >= '0' && (attribute[i] <= '9')))
+				{
+					errorCheck(6);
+				}
+			}
+			else
+			{
+
+				if (!(attribute[i] >= '0' && (attribute[i] <= '9')))
+				{
+					errorCheck(6);
+				}
+			}
+
+		}
 		attributeINT = stoi(attribute);
+		
 		for (size_t i = 0; i < numbersArraySize; i++)
 		{
 			numbersArray[i] += attributeINT;
@@ -171,6 +192,26 @@ string applyCommand(vector<int>numbersArray, string temp, string attribute, int 
 	}
 	else if (temp == "MAP-MLT")
 	{
+	for (size_t i = 0; i < attribute.size(); i++)
+	{
+		if (attribute[i] == '-')
+		{
+			continue;
+			if (!(attribute[i] >= '0' && (attribute[i] <= '9')))
+			{
+				errorCheck(6);
+			}
+		}
+		else
+		{
+
+			if (!(attribute[i] >= '0' && (attribute[i] <= '9')))
+			{
+				errorCheck(6);
+			}
+		}
+
+	}
 		attributeINT = stoi(attribute);
 		for (size_t i = 0; i < numbersArraySize; i++)
 		{
@@ -189,6 +230,10 @@ string applyCommand(vector<int>numbersArray, string temp, string attribute, int 
 		else if (attribute == "DSC")
 		{
 			sort(numbersArray.begin(), numbersArray.end(), greater<int>());
+		}
+		else
+		{
+			errorCheck(6);
 		}
 		for (size_t i = 0; i < numbersArraySize; i++)
 		{
@@ -247,14 +292,28 @@ vector<int> addNumsToVector(stack <string>numbers, int counterDigits, string sin
 			}
 		
 		}
-		//for (size_t i = 0; i < singleNumSize; i++)
-		//{
-		//    /*if (!(singleNum[i]>='0' && singleNum[i]<='9'))
-		//    {
-		//        cout << "Wrong input: digits expected";
-		//        return;
-		//    }*/
-		//}
+		for (size_t i = 0; i < singleNumSize; i++)
+		{
+			if (singleNum[i]=='-')
+			{
+				continue;
+				if (!(singleNum[i] >= '0' && (singleNum[i] <= '9')))
+				{
+					isThereError = 2;
+					errorCheck(2);
+				}
+			}
+			else
+			{
+
+				if (!(singleNum[i] >= '0' && (singleNum[i] <= '9')))
+				{
+					isThereError = 2;
+					errorCheck(2);
+				}
+			}
+		    
+		}
 		numbersArray[arrayCount] = stoi(singleNum);
 		num.erase(0, counterDigits + 1);
 		arrayCount++;
@@ -308,29 +367,24 @@ void Parser::calculate(const string& temp)
 		{
 			vector<int>numbersArray = addNumsToVector(numbers, counterDigits, singleNum, arrayCount, isThereError);
 
-
-
-			/* if (temp == "AGG-SUM" || temp == "AGG-PRO" || temp == "AGG-AVG" && numbersArray.size()<2)
-			 {
-				 cout << "Not enough arguments";
-				 return;
-			 }*/
+			bool isThereFalseTag = false;
+			vector<string>tags{"MAP-INC","MAP-MLT","AGG-SUM","AGG-PRO","AGG-AVG","AGG-FST","AGG-LST","SRT-REV","SRT-ORD","SRT-SLC", "SRT-DST"};
+			
+			if (!(std::count(tags.begin(), tags.end(), temp)))
+			{
+				isThereError = 1;
+				errorCheck(isThereError);
+			}
+		
+			if ((temp == "AGG-SUM" || temp == "AGG-PRO" || temp == "AGG-AVG") && numbersArray.size()<2)
+			{
+				isThereError = 4;
+				errorCheck(isThereError);
+			}
 			string result;
 			result = applyCommand(numbersArray, temp, attribute, attributeINT, result, isThereError);
 
-			//else
-			// {
-			//    if (temp!=commands.top())//проверявам дали е различно от 11-те тага
-			//    {
-			//        cout << "Tags do not match!"; 
-			//    }
-			//    else
-			//    {
-			//        cout << "Wrong closing tag!";
-			//    }
-			//    
-			//    return;
-			// }
+		
 			numbers.pop();
 			if (numbers.empty())
 			{
@@ -347,6 +401,11 @@ void Parser::calculate(const string& temp)
 
 			commands.pop();
 			lastCommandOpenning = false;
+		}
+		else
+		{
+			isThereError = 1;
+			errorCheck(isThereError);
 		}
 	}
 void Parser::lexer()

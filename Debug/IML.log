@@ -5,11 +5,12 @@ C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(100,24): warning C4018: '
 C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(124,24): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(140,13): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(155,24): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(164,24): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(175,24): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(193,24): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(211,24): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(224,23): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(284,24): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(185,24): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(216,24): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(238,24): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(256,24): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(269,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(295,24): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(343,24): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(40): warning C4715: 'errorCheck': not all control paths return a value
   IML.vcxproj -> C:\Users\Rosi Deyanova\source\repos\IML\Debug\IML.exe
