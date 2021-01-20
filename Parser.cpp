@@ -446,7 +446,7 @@ void Parser::lexer()
 		else if (input[i] == '>' && input[i + 1] != '<') // gets the numbers and puts the in a stack
 		{
 			IslastTagOpen = false;
-			while (input[i + 1] != '>' && input[i + 1] != '<')
+			while (input[i + 1] != '>' && input[i + 1] != '<' && input[i+1]!='\0')
 			{
 				counterForFindingNumbers++; i++;
 			}
@@ -461,10 +461,15 @@ void Parser::lexer()
 				if (numbers.empty()) {
 					numbers.push(temp);
 				}
-				else {
+				else if ((!numbers.empty()) && startIndex+counterForFindingNumbers!=inputSize) //проверява дали стекът е празен и числата не са изцяло извън командите
+				{
 					numbers.top() += " " + temp;
 				}
 			}
+			//if (startIndex+counterForFindingNumbers==input.size()) //??? ako w kraq na inputa ima random 4isla
+			//{
+			//	numbers.pop();
+			//}
 
 			counterForFindingNumbers = 0;
 		}
