@@ -1,15 +1,14 @@
 ﻿  Parser.cpp
-C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(77,23): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(106,24): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(154,25): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(165,25): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(177,25): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(201,25): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(217,14): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(232,25): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(241,25): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(252,25): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(270,25): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(281,21): warning C4018: '>': signed/unsigned mismatch
-C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(288,25): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(67,24): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(78,24): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(90,24): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(114,24): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(130,13): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(145,24): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(154,24): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(165,24): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(183,24): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(201,24): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(214,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Rosi Deyanova\source\repos\IML\IML\Parser.cpp(273,24): warning C4018: '<': signed/unsigned mismatch
   IML.vcxproj -> C:\Users\Rosi Deyanova\source\repos\IML\Debug\IML.exe

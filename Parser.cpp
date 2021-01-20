@@ -1,4 +1,5 @@
 ﻿#include "Parser.h"
+int isThereError = 0;
 
 Parser::Parser()
 {
@@ -57,273 +58,289 @@ int countDigits(std::string line)
 	return count;
 }
 
-void Parser::calculate(const string& temp)
+string applyCommand(vector<int>numbersArray, string temp, string attribute, int attributeINT, string result, int isThereError)
 {
-	int CounterForClosingCommands = 0;
-	int counterForAttrubutes = 0;
-	int startingIndexForAttributes = 0;
-	string attribute;
-	int attributeINT;
-	string commandTop = commands.top();
-	bool needsToBreak = false;
-	int counterDigits = 1;
-	int k = 0;
-	string singleNum;
-	int arrayCount = 0;
-	int commandSize = commandTop.size();
-
-
-
-	for (size_t i = 0; i < commandSize; i++)
+	int numbersArraySize = numbersArray.size();
+	if (temp == "AGG-SUM")
 	{
-		if (commandTop[i] == '"')
+		int sum = 0;
+		for (size_t i = 0; i < numbersArraySize; i++)
 		{
-			startingIndexForAttributes = i + 1;
-			while (commandTop[i + 1] != '"')
-			{
-				counterForAttrubutes++;
-				i++;
-				needsToBreak = true;
-			}
+			sum += numbersArray[i];
+		}
 
-			attribute = commandTop.substr(startingIndexForAttributes, counterForAttrubutes);
-			commands.top() = commandTop.substr(0, commands.top().size() - 3 - counterForAttrubutes);
+		result = to_string(sum);
 
-			if (needsToBreak == true)
+	}
+	else if (temp == "AGG-PRO")
+	{
+		int pro = 1;
+		for (size_t i = 0; i < numbersArraySize; i++)
+		{
+			pro *= numbersArray[i];
+		}
+
+		result = to_string(pro);
+
+	}
+	else if (temp == "AGG-AVG")
+	{
+		int count = 0;
+		int sum = 0;
+		for (size_t i = 0; i < numbersArraySize; i++)
+		{
+			sum += numbersArray[i];
+			count++;
+		}
+
+		result = to_string((sum / count));
+
+	}
+	else if (temp == "AGG-FST")
+	{
+		result = to_string(numbersArray[0]);
+
+	}
+	else if (temp == "AGG-LST")
+	{
+		numbersArraySize = numbersArray.size();
+		result = to_string(numbersArray[numbersArraySize - 1]);
+
+	}
+	else if (temp == "SRT-REV")
+	{
+		reverse(numbersArray.begin(), numbersArray.end());
+		numbersArraySize = numbersArray.size();
+		for (size_t i = 0; i < numbersArraySize; i++)
+		{
+			result += to_string(numbersArray[i]) + ' ';
+		}
+		result.erase(result.size() - 1);
+
+	}
+	else if (temp == "SRT-DST")
+	{
+
+		unsigned size = numbersArraySize;
+		for (size_t i = 0; i < size - 1; i++)
+		{
+
+			bool dublicate = false;
+			int j = i + 1;
+			for (; j < size; j++)
 			{
-				break;
+				if (numbersArray[i] == numbersArray[j])
+				{
+					dublicate = true;
+					break;
+				}
 			}
+			if (dublicate == true)
+			{
+				numbersArray.erase(numbersArray.begin() + j, numbersArray.begin() + j + 1);
+				--size;
+			}
+		}
+		numbersArraySize = numbersArray.size();
+		for (size_t i = 0; i < numbersArraySize; i++)
+		{
+			result += to_string(numbersArray[i]) + ' ';
+		}
+		result.erase(result.size() - 1);
+	}
+	else if (temp == "MAP-INC")
+	{
+		attributeINT = stoi(attribute);
+		for (size_t i = 0; i < numbersArraySize; i++)
+		{
+			numbersArray[i] += attributeINT;
+			result += to_string(numbersArray[i]) + ' ';
+		}
+		result.erase(result.size() - 1);
+
+	}
+	else if (temp == "MAP-MLT")
+	{
+		attributeINT = stoi(attribute);
+		for (size_t i = 0; i < numbersArraySize; i++)
+		{
+			numbersArray[i] *= attributeINT;
+			result += to_string(numbersArray[i]) + ' ';
+		}
+		result.erase(result.size() - 1);
+
+	}
+	else if (temp == "SRT-ORD")
+	{
+		if (attribute == "ASC")
+		{
+			sort(numbersArray.begin(), numbersArray.end());
+		}
+		else if (attribute == "DSC")
+		{
+			sort(numbersArray.begin(), numbersArray.end(), greater<int>());
+		}
+		for (size_t i = 0; i < numbersArraySize; i++)
+		{
+
+			result += to_string(numbersArray[i]) + ' ';
+		}
+		result.erase(result.size() - 1);
+
+	}
+	else if (temp == "SRT-SLC")
+	{
+		attributeINT = stoi(attribute);
+		/*if (attributeINT > numbersArray.size())
+		{
+			cout << "Invalit attribute";
+			return;
+		}*/
+		numbersArray.erase(numbersArray.begin(), numbersArray.begin() + attributeINT);
+		int numbersArrayS = numbersArray.size();
+		for (size_t i = 0; i < numbersArrayS; i++)
+		{
+			result += to_string(numbersArray[i]) + ' ';
+		}
+		result.erase(result.size() - 1);
+	}
+	return result;
+}
+vector<int> addNumsToVector(stack <string>numbers, int counterDigits, string singleNum, int arrayCount, int isThereError) {
+
+	string lenght = numbers.top();
+	int lenghtLenght = lenght.length();
+	int spaceCount = 0;
+	for (size_t i = 0; i < lenghtLenght; i++)
+	{
+		if (lenght[i] == ' ')
+		{
+			spaceCount++;
 		}
 	}
+	vector<int>numbersArray(spaceCount + 1);
+	string num = numbers.top();
 
-
-	if (temp == commands.top())
+	while (!num.empty())
 	{
 
-		string lenght = numbers.top();
-		int lenghtLenght = lenght.length();
-		int spaceCount = 0;
-		for (size_t i = 0; i < lenghtLenght; i++)
+		counterDigits = countDigits(num);
+		singleNum = num.substr(0, counterDigits);
+		int singleNumSize = singleNum.size();
+	/*	if (singleNumSize > 0)
 		{
-			if (lenght[i] == ' ')
+			if (singleNum[0] == '0')
 			{
-				spaceCount++;
-			}
-		}
-		vector<int>numbersArray(spaceCount + 1);
-		string num = numbers.top();
-
-		while (!num.empty())
-		{
-
-			counterDigits = countDigits(num);
-			singleNum = num.substr(0, counterDigits);
-			int singleNumSize = singleNum.size();
-			if (singleNumSize > 0)
-			{
-				if (singleNum[0] == '0')
-				{
-					cout << "Invalid number!";
-					return;
-				}
-			}
-			//for (size_t i = 0; i < singleNumSize; i++)
-			//{
-			//    /*if (!(singleNum[i]>='0' && singleNum[i]<='9'))
-			//    {
-			//        cout << "Wrong input: digits expected";
-			//        return;
-			//    }*/
-			//}
-			numbersArray[arrayCount] = stoi(singleNum);
-			num.erase(0, counterDigits + 1);
-			arrayCount++;
-			counterDigits = 1; k = 0;
-
-		}
-		/* if (temp == "AGG-SUM" || temp == "AGG-PRO" || temp == "AGG-AVG" && numbersArray.size()<2)
-		 {
-			 cout << "Not enough arguments";
-			 return;
-		 }*/
-		string result;
-		int numbersArraySize = numbersArray.size();
-		if (temp == "AGG-SUM")
-		{
-			int sum = 0;
-			for (size_t i = 0; i < numbersArraySize; i++)
-			{
-				sum += numbersArray[i];
-			}
-
-			result = to_string(sum);
-
-		}
-		else if (temp == "AGG-PRO")
-		{
-			int pro = 1;
-			for (size_t i = 0; i < numbersArraySize; i++)
-			{
-				pro *= numbersArray[i];
-			}
-
-			result = to_string(pro);
-
-		}
-		else if (temp == "AGG-AVG")
-		{
-			int count = 0;
-			int sum = 0;
-			for (size_t i = 0; i < numbersArraySize; i++)
-			{
-				sum += numbersArray[i];
-				count++;
-			}
-
-			result = to_string((sum / count));
-
-		}
-		else if (temp == "AGG-FST")
-		{
-			result = to_string(numbersArray[0]);
-
-		}
-		else if (temp == "AGG-LST")
-		{
-			numbersArraySize = numbersArray.size();
-			result = to_string(numbersArray[numbersArraySize - 1]);
-
-		}
-		else if (temp == "SRT-REV")
-		{
-			reverse(numbersArray.begin(), numbersArray.end());
-			numbersArraySize = numbersArray.size();
-			for (size_t i = 0; i < numbersArraySize; i++)
-			{
-				result += to_string(numbersArray[i]) + ' ';
-			}
-			result.erase(result.size() - 1);
-
-		}
-		else if (temp == "SRT-DST")
-		{
-
-			unsigned size = numbersArraySize;
-			for (size_t i = 0; i < size - 1; i++)
-			{
-
-				bool dublicate = false;
-				int j = i + 1;
-				for (; j < size; j++)
-				{
-					if (numbersArray[i] == numbersArray[j])
-					{
-						dublicate = true;
-						break;
-					}
-				}
-				if (dublicate == true)
-				{
-					numbersArray.erase(numbersArray.begin() + j, numbersArray.begin() + j + 1);
-					--size;
-				}
-			}
-			numbersArraySize = numbersArray.size();
-			for (size_t i = 0; i < numbersArraySize; i++)
-			{
-				result += to_string(numbersArray[i]) + ' ';
-			}
-			result.erase(result.size() - 1);
-		}
-		else if (temp == "MAP-INC")
-		{
-			attributeINT = stoi(attribute);
-			for (size_t i = 0; i < numbersArraySize; i++)
-			{
-				numbersArray[i] += attributeINT;
-				result += to_string(numbersArray[i]) + ' ';
-			}
-			result.erase(result.size() - 1);
-
-		}
-		else if (temp == "MAP-MLT")
-		{
-			attributeINT = stoi(attribute);
-			for (size_t i = 0; i < numbersArraySize; i++)
-			{
-				numbersArray[i] *= attributeINT;
-				result += to_string(numbersArray[i]) + ' ';
-			}
-			result.erase(result.size() - 1);
-
-		}
-		else if (temp == "SRT-ORD")
-		{
-			if (attribute == "ASC")
-			{
-				sort(numbersArray.begin(), numbersArray.end());
-			}
-			else if (attribute == "DSC")
-			{
-				sort(numbersArray.begin(), numbersArray.end(), greater<int>());
-			}
-			for (size_t i = 0; i < numbersArraySize; i++)
-			{
-
-				result += to_string(numbersArray[i]) + ' ';
-			}
-			result.erase(result.size() - 1);
-
-		}
-		else if (temp == "SRT-SLC")
-		{
-			attributeINT = stoi(attribute);
-			if (attributeINT > numbersArray.size())
-			{
-				cout << "Invalit attribute";
+				cout << "Invalid number!";
 				return;
 			}
-			numbersArray.erase(numbersArray.begin(), numbersArray.begin() + attributeINT);
-			int numbersArrayS = numbersArray.size();
-			for (size_t i = 0; i < numbersArrayS; i++)
+		}*/
+		//for (size_t i = 0; i < singleNumSize; i++)
+		//{
+		//    /*if (!(singleNum[i]>='0' && singleNum[i]<='9'))
+		//    {
+		//        cout << "Wrong input: digits expected";
+		//        return;
+		//    }*/
+		//}
+		numbersArray[arrayCount] = stoi(singleNum);
+		num.erase(0, counterDigits + 1);
+		arrayCount++;
+		counterDigits = 1;
+
+
+	}
+	return numbersArray;
+}
+
+	void Parser::calculate(const string& temp)
+	{
+		int CounterForClosingCommands = 0;
+		int counterForAttrubutes = 0;
+		int startingIndexForAttributes = 0;
+		string attribute;
+		int attributeINT=0;
+		string commandTop = commands.top();
+		bool needsToBreak = false;
+		int counterDigits = 1;
+		int k = 0;
+		string singleNum;
+		int arrayCount = 0;
+		int commandSize = commandTop.size();
+
+
+
+		for (size_t i = 0; i < commandSize; i++)
+		{
+			if (commandTop[i] == '"')
 			{
-				result += to_string(numbersArray[i]) + ' ';
+				startingIndexForAttributes = i + 1;
+				while (commandTop[i + 1] != '"')
+				{
+					counterForAttrubutes++;
+					i++;
+					needsToBreak = true;
+				}
+
+				attribute = commandTop.substr(startingIndexForAttributes, counterForAttrubutes);
+				commands.top() = commandTop.substr(0, commands.top().size() - 3 - counterForAttrubutes);
+
+				if (needsToBreak == true)
+				{
+					break;
+				}
 			}
-			result.erase(result.size() - 1);
 		}
 
-		//else
-		// {
-		//    if (temp!=commands.top())//проверявам дали е различно от 11-те тага
-		//    {
-		//        cout << "Tags do not match!"; 
-		//    }
-		//    else
-		//    {
-		//        cout << "Wrong closing tag!";
-		//    }
-		//    
-		//    return;
-		// }
-		numbers.pop();
-		if (numbers.empty())
-		{
-		numbers.push(result);
-		}
-		else if (numbers.top()=="")
-		{
-			numbers.top() = result;
-		}		
-		else if (numbers.top() != result)
-		{
-			numbers.top() += " " + result;
-		}
 
-		commands.pop();
-		lastCommandOpenning = false;
+		if (temp == commands.top())
+		{
+			vector<int>numbersArray = addNumsToVector(numbers, counterDigits, singleNum, arrayCount, isThereError);
+
+
+
+			/* if (temp == "AGG-SUM" || temp == "AGG-PRO" || temp == "AGG-AVG" && numbersArray.size()<2)
+			 {
+				 cout << "Not enough arguments";
+				 return;
+			 }*/
+			string result;
+			result = applyCommand(numbersArray, temp, attribute, attributeINT, result, isThereError);
+
+			//else
+			// {
+			//    if (temp!=commands.top())//проверявам дали е различно от 11-те тага
+			//    {
+			//        cout << "Tags do not match!"; 
+			//    }
+			//    else
+			//    {
+			//        cout << "Wrong closing tag!";
+			//    }
+			//    
+			//    return;
+			// }
+			numbers.pop();
+			if (numbers.empty())
+			{
+				numbers.push(result);
+			}
+			else if (numbers.top() == "")
+			{
+				numbers.top() = result;
+			}
+			else if (numbers.top() != result)
+			{
+				numbers.top() += " " + result;
+			}
+
+			commands.pop();
+			lastCommandOpenning = false;
+		}
 	}
 
-}
+
+
 
 void Parser::lexer()
 {
@@ -342,7 +359,7 @@ void Parser::lexer()
 		num = "";
 		int startIndex = 0;
 		startIndex = i + 1;
-		
+
 
 		if (input[i] == '<' && input[i + 1] != '/')  //finds the open tags and adds them to a stack
 		{
@@ -356,7 +373,7 @@ void Parser::lexer()
 			counterForFindingCommands = 0;
 			lastCommandOpenning = true;
 		}
-		else if (input[i] == '>' && input[i + 1] == '<' && IslastTagOpen==true)
+		else if (input[i] == '>' && input[i + 1] == '<' && IslastTagOpen == true)
 		{
 			numbers.push("");
 		}
