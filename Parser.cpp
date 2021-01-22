@@ -196,14 +196,16 @@ string applyCommand(vector<double>numbersArray, string temp, string attribute, i
 				if (numbersArray[i] == numbersArray[j])
 				{
 					dublicate = true;
-					break;
+					
+				}
+				if (dublicate == true)
+				{
+					numbersArray.erase(numbersArray.begin() + j, numbersArray.begin() + j + 1);
+					--size;
+					dublicate = false;
 				}
 			}
-			if (dublicate == true)
-			{
-				numbersArray.erase(numbersArray.begin() + j, numbersArray.begin() + j + 1);
-				--size;
-			}
+			
 		}
 		numbersArraySize = numbersArray.size();
 		for (size_t i = 0; i < numbersArraySize; i++)
