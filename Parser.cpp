@@ -32,7 +32,7 @@ bool errorCheck(int isThereError) {
 	case 2:cout << "No letters allowed between the tags \nTry different input"; exit(0); break;
 	case 3: cout << "Number incorrect \nTry different input"; exit(0); break;
 	case 4:cout << "Not enough numbers for the tag \nTry different input"; exit(0); break;
-	case 5:break;
+	case 5:cout << "Can't be passed a double as an atribute in SRT-SLC tag \nTry different input"; exit(0); break;
 	case 6:cout << "Incorrect attribute \nTry different input"; exit(0); break;
 	default: return true;
 		break;
@@ -45,8 +45,60 @@ bool Parser::write(const string& filename) const
 	{
 		return false;
 	}
+	if (!commands.empty())
+	{
+		errorCheck(1);
 
-	if (!(fout << numbers.top()))
+	}
+	string result;
+	string toPrint = numbers.top();
+	int toPrintSize = toPrint.size();
+	for (size_t i = 0; i < toPrintSize; i++)
+	{
+		if (toPrint[i]=='.')
+		{
+			bool flag = false;
+			i++;
+			string afterDot;
+			while (i<toPrintSize && toPrint[i]!=' ')
+			{
+
+				if (toPrint[i]!='0')
+				{
+					flag = true;
+				}
+				afterDot += toPrint[i];
+				i++;
+				
+
+			}
+			if (flag==true)
+			{
+				int counterLastNum=0;
+				unsigned afterDotSize = afterDot.size();
+				for (size_t i = afterDotSize-1; i >0; i--)
+				{
+					if (afterDot[i]!='0') 
+					{
+						break;
+					}
+					counterLastNum++;
+					
+				}
+				afterDot = afterDot.substr(0, afterDotSize-counterLastNum);
+				result +="." +afterDot;
+				
+			}
+			result += " ";
+			
+		}
+		else
+		{
+			result += toPrint[i];
+		}
+	}
+
+	if (!(fout << result))
 	{
 		return false;
 	}
@@ -59,7 +111,7 @@ int countDigits(std::string line)
 	for (char i : line) {
 
 
-		if (i !=' ') {
+		if (i != ' ') {
 			count++;
 		}
 		else {
@@ -68,12 +120,14 @@ int countDigits(std::string line)
 	}
 	return count;
 }
-string applyCommand(vector<int>numbersArray, string temp, string attribute, int attributeINT, string result, int isThereError)
+string applyCommand(vector<double>numbersArray, string temp, string attribute, int attributeINT, string result, int isThereError)
 {
+	
+
 	int numbersArraySize = numbersArray.size();
 	if (temp == "AGG-SUM")
 	{
-		int sum = 0;
+		double sum = 0;
 		for (size_t i = 0; i < numbersArraySize; i++)
 		{
 			sum += numbersArray[i];
@@ -84,7 +138,7 @@ string applyCommand(vector<int>numbersArray, string temp, string attribute, int 
 	}
 	else if (temp == "AGG-PRO")
 	{
-		int pro = 1;
+		double pro = 1;
 		for (size_t i = 0; i < numbersArraySize; i++)
 		{
 			pro *= numbersArray[i];
@@ -96,7 +150,7 @@ string applyCommand(vector<int>numbersArray, string temp, string attribute, int 
 	else if (temp == "AGG-AVG")
 	{
 		int count = 0;
-		int sum = 0;
+		double sum = 0;
 		for (size_t i = 0; i < numbersArraySize; i++)
 		{
 			sum += numbersArray[i];
@@ -160,31 +214,31 @@ string applyCommand(vector<int>numbersArray, string temp, string attribute, int 
 	}
 	else if (temp == "MAP-INC")
 	{
-		for (size_t i = 0; i < attribute.size(); i++)
+		double attributeDouble;
+		int attributeSize = attribute.size();
+		if (!(attribute[0] == '-' || (attribute[0] >= '0' && (attribute[0] <= '9')) || attribute[attributeSize - 1] == '.'))
 		{
-			if (attribute[i] == '-')
+			errorCheck(6);
+		}
+		for (size_t i = 1; i < attributeSize; i++)
+		{
+			if (attribute[i] != '.' && (!((attribute[i] >= '0') && (attribute[i] <= '9'))))
 			{
-				continue;
-				if (!(attribute[i] >= '0' && (attribute[i] <= '9')))
-				{
-					errorCheck(6);
-				}
+				errorCheck(6);
 			}
-			else
-			{
 
-				if (!(attribute[i] >= '0' && (attribute[i] <= '9')))
-				{
-					errorCheck(6);
-				}
-			}
 
 		}
-		attributeINT = stoi(attribute);
-		
+		attributeDouble = stod(attribute);
+		if (attributeDouble == -0)
+		{
+			attributeDouble = 0;
+
+		}
+
 		for (size_t i = 0; i < numbersArraySize; i++)
 		{
-			numbersArray[i] += attributeINT;
+			numbersArray[i] += attributeDouble;
 			result += to_string(numbersArray[i]) + ' ';
 		}
 		result.erase(result.size() - 1);
@@ -192,33 +246,39 @@ string applyCommand(vector<int>numbersArray, string temp, string attribute, int 
 	}
 	else if (temp == "MAP-MLT")
 	{
-	for (size_t i = 0; i < attribute.size(); i++)
+	double attributeDouble;
+	int attributeSize = attribute.size();
+	if (!(attribute[0] == '-' || (attribute[0] >= '0' && (attribute[0] <= '9')) || attribute[attributeSize - 1] == '.'))
 	{
-		if (attribute[i] == '-')
+		errorCheck(6);
+	}
+	for (size_t i = 1; i < attributeSize; i++)
+	{
+		if (attribute[i] != '.' && (!((attribute[i] >= '0') && (attribute[i] <= '9'))))
 		{
-			continue;
-			if (!(attribute[i] >= '0' && (attribute[i] <= '9')))
-			{
-				errorCheck(6);
-			}
+			errorCheck(6);
 		}
-		else
-		{
 
-			if (!(attribute[i] >= '0' && (attribute[i] <= '9')))
-			{
-				errorCheck(6);
-			}
-		}
 
 	}
-		attributeINT = stoi(attribute);
-		for (size_t i = 0; i < numbersArraySize; i++)
+	attributeDouble = stod(attribute);
+	if (attributeDouble == -0)
+	{
+		attributeDouble = 0;
+
+	}
+
+	for (size_t i = 0; i < numbersArraySize; i++)
+	{
+		numbersArray[i] *= attributeDouble;
+		if (numbersArray[i]==-0)
 		{
-			numbersArray[i] *= attributeINT;
-			result += to_string(numbersArray[i]) + ' ';
+			numbersArray[i] = 0;
+
 		}
-		result.erase(result.size() - 1);
+		result += to_string(numbersArray[i]) + ' ';
+	}
+	result.erase(result.size() - 1);
 
 	}
 	else if (temp == "SRT-ORD")
@@ -245,12 +305,15 @@ string applyCommand(vector<int>numbersArray, string temp, string attribute, int 
 	}
 	else if (temp == "SRT-SLC")
 	{
-		attributeINT = stoi(attribute);
-		/*if (attributeINT > numbersArray.size())
+		for (size_t i = 0; i < attribute.size(); i++)
 		{
-			cout << "Invalit attribute";
-			return;
-		}*/
+			if (attribute[i] == '.')
+			{
+				errorCheck(5);
+			}
+		}
+		attributeINT = stoi(attribute);
+
 		numbersArray.erase(numbersArray.begin(), numbersArray.begin() + attributeINT);
 		int numbersArrayS = numbersArray.size();
 		for (size_t i = 0; i < numbersArrayS; i++)
@@ -261,7 +324,7 @@ string applyCommand(vector<int>numbersArray, string temp, string attribute, int 
 	}
 	return result;
 }
-vector<int> addNumsToVector(stack <string>numbers, int counterDigits, string singleNum, int arrayCount, int isThereError) {
+vector<double> addNumsToVector(stack <string>numbers, int counterDigits, string singleNum, int arrayCount, int isThereError) {
 
 	string lenght = numbers.top();
 	int lenghtLenght = lenght.length();
@@ -273,7 +336,7 @@ vector<int> addNumsToVector(stack <string>numbers, int counterDigits, string sin
 			spaceCount++;
 		}
 	}
-	vector<int>numbersArray(spaceCount + 1);
+	vector<double>numbersArray(spaceCount + 1);
 	string num = numbers.top();
 
 	while (!num.empty())
@@ -282,39 +345,33 @@ vector<int> addNumsToVector(stack <string>numbers, int counterDigits, string sin
 		counterDigits = countDigits(num);
 		singleNum = num.substr(0, counterDigits);
 		int singleNumSize = singleNum.size();
-		if (singleNumSize > 0)
+		if (singleNumSize > 1)
 		{
-			if (singleNum[0] == '0')
+			if (singleNum[0] == '0'&& singleNum[1]!='.')//015
 			{
-				isThereError = 3;
-				errorCheck(isThereError);
 				
-			}
-		
-		}
-		for (size_t i = 0; i < singleNumSize; i++)
-		{
-			if (singleNum[i]=='-')
-			{
-				continue;
-				if (!(singleNum[i] >= '0' && (singleNum[i] <= '9')))
-				{
-					isThereError = 2;
-					errorCheck(2);
-				}
-			}
-			else
-			{
+				errorCheck(3);
 
-				if (!(singleNum[i] >= '0' && (singleNum[i] <= '9')))
-				{
-					isThereError = 2;
-					errorCheck(2);
-				}
 			}
-		    
+
 		}
-		numbersArray[arrayCount] = stoi(singleNum);
+		size_t i = 0;
+		if (singleNum[i] == '-')
+		{
+			i++;
+		}
+		while (i < singleNumSize)
+		{
+			if (!(singleNum[i] >= '0' && (singleNum[i] <= '9') || (singleNum[i] == '.')))
+			{
+				errorCheck(2);
+
+			}
+			i++;
+		}
+
+
+		numbersArray[arrayCount] = stod(singleNum);
 		num.erase(0, counterDigits + 1);
 		arrayCount++;
 		counterDigits = 1;
@@ -323,91 +380,98 @@ vector<int> addNumsToVector(stack <string>numbers, int counterDigits, string sin
 	}
 	return numbersArray;
 }
-void Parser::calculate(const string& temp)
+void Parser::calculate(string& temp)
+{
+	int CounterForClosingCommands = 0;
+	int counterForAttrubutes = 0;
+	int startingIndexForAttributes = 0;
+	string attribute;
+	int attributeINT = 0;
+	string commandTop = commands.top();
+	bool needsToBreak = false;
+	int counterDigits = 1;
+	int k = 0;
+	string singleNum;
+	int arrayCount = 0;
+	int commandSize = commandTop.size();
+
+
+
+	for (size_t i = 0; i < commandSize; i++)
 	{
-		int CounterForClosingCommands = 0;
-		int counterForAttrubutes = 0;
-		int startingIndexForAttributes = 0;
-		string attribute;
-		int attributeINT=0;
-		string commandTop = commands.top();
-		bool needsToBreak = false;
-		int counterDigits = 1;
-		int k = 0;
-		string singleNum;
-		int arrayCount = 0;
-		int commandSize = commandTop.size();
-
-
-
-		for (size_t i = 0; i < commandSize; i++)
+		if (commandTop[i] == '"')
 		{
-			if (commandTop[i] == '"')
+			startingIndexForAttributes = i + 1;
+			while (commandTop[i + 1] != '"')
 			{
-				startingIndexForAttributes = i + 1;
-				while (commandTop[i + 1] != '"')
-				{
-					counterForAttrubutes++;
-					i++;
-					needsToBreak = true;
-				}
+				counterForAttrubutes++;
+				i++;
+				needsToBreak = true;
+			}
 
-				attribute = commandTop.substr(startingIndexForAttributes, counterForAttrubutes);
-				commands.top() = commandTop.substr(0, commands.top().size() - 3 - counterForAttrubutes);
+			attribute = commandTop.substr(startingIndexForAttributes, counterForAttrubutes);
+			commands.top() = commandTop.substr(0, commands.top().size() - 3 - counterForAttrubutes);
 
-				if (needsToBreak == true)
-				{
-					break;
-				}
+			if (needsToBreak == true)
+			{
+				break;
 			}
 		}
+	}
 
 
-		if (temp == commands.top())
+	if (temp == commands.top())
+	{
+		if (numbers.top()==""&&numbers.size()==commands.size())
 		{
-			vector<int>numbersArray = addNumsToVector(numbers, counterDigits, singleNum, arrayCount, isThereError);
-
-			bool isThereFalseTag = false;
-			vector<string>tags{"MAP-INC","MAP-MLT","AGG-SUM","AGG-PRO","AGG-AVG","AGG-FST","AGG-LST","SRT-REV","SRT-ORD","SRT-SLC", "SRT-DST"};
-			
-			if (!(std::count(tags.begin(), tags.end(), temp)))
-			{
-				isThereError = 1;
-				errorCheck(isThereError);
-			}
-		
-			if ((temp == "AGG-SUM" || temp == "AGG-PRO" || temp == "AGG-AVG") && numbersArray.size()<2)
-			{
-				isThereError = 4;
-				errorCheck(isThereError);
-			}
-			string result;
-			result = applyCommand(numbersArray, temp, attribute, attributeINT, result, isThereError);
-
-		
 			numbers.pop();
-			if (numbers.empty())
-			{
-				numbers.push(result);
-			}
-			else if (numbers.top() == "")
-			{
-				numbers.top() = result;
-			}
-			else if (numbers.top() != result)
-			{
-				numbers.top() += " " + result;
-			}
-
 			commands.pop();
-			lastCommandOpenning = false;
+			return;
+			
 		}
-		else
+		vector<double>numbersArray = addNumsToVector(numbers, counterDigits, singleNum, arrayCount, isThereError);
+
+		bool isThereFalseTag = false;
+		vector<string>tags{ "MAP-INC","MAP-MLT","AGG-SUM","AGG-PRO","AGG-AVG","AGG-FST","AGG-LST","SRT-REV","SRT-ORD","SRT-SLC", "SRT-DST" };
+
+		if (!(std::count(tags.begin(), tags.end(), temp)))
 		{
 			isThereError = 1;
 			errorCheck(isThereError);
 		}
+
+		if ((temp == "AGG-SUM" || temp == "AGG-PRO" || temp == "AGG-AVG") && numbersArray.size() < 2)
+		{
+			isThereError = 4;
+			errorCheck(isThereError);
+		}
+		string result;
+		result = applyCommand(numbersArray, temp, attribute, attributeINT, result, isThereError);
+
+
+		numbers.pop();
+		if (numbers.empty())
+		{
+			numbers.push(result);
+		}
+		else if (numbers.top() == "")
+		{
+			numbers.top() = result;
+		}
+		else if (numbers.top() != result)
+		{
+			numbers.top() += " " + result;
+		}
+
+		commands.pop();
+		lastCommandOpenning = false;
 	}
+	else
+	{
+		isThereError = 1;
+		errorCheck(isThereError);
+	}
+}
 void Parser::lexer()
 {
 
@@ -432,6 +496,10 @@ void Parser::lexer()
 			IslastTagOpen = true;
 			while (input[i + 1] != '>')
 			{
+				if (input[i + 1] == '<'|| (i + 1) == input.size()) //<MAP-MLT "-0"<15</MAP-MLT> or <MAP-MLT "1" 
+				{
+					errorCheck(1);
+				}
 				counterForFindingCommands++; i++;
 			}
 			temp = input.substr(startIndex, counterForFindingCommands);
@@ -441,12 +509,12 @@ void Parser::lexer()
 		}
 		else if (input[i] == '>' && input[i + 1] == '<' && IslastTagOpen == true)
 		{
-			numbers.push("");
+			numbers.push(""); 
 		}
 		else if (input[i] == '>' && input[i + 1] != '<') // gets the numbers and puts the in a stack
 		{
 			IslastTagOpen = false;
-			while (input[i + 1] != '>' && input[i + 1] != '<' && input[i+1]!='\0')
+			while (input[i + 1] != '>' && input[i + 1] != '<' && input[i + 1] != '\0')
 			{
 				counterForFindingNumbers++; i++;
 			}
@@ -461,15 +529,12 @@ void Parser::lexer()
 				if (numbers.empty()) {
 					numbers.push(temp);
 				}
-				else if ((!numbers.empty()) && startIndex+counterForFindingNumbers!=inputSize) //проверява дали стекът е празен и числата не са изцяло извън командите
+				else if ((!numbers.empty()) && startIndex + counterForFindingNumbers != inputSize) //проверява дали стекът е празен и числата не са изцяло извън командите
 				{
 					numbers.top() += " " + temp;
 				}
 			}
-			//if (startIndex+counterForFindingNumbers==input.size()) //??? ako w kraq na inputa ima random 4isla
-			//{
-			//	numbers.pop();
-			//}
+			
 
 			counterForFindingNumbers = 0;
 		}
@@ -489,7 +554,10 @@ void Parser::lexer()
 			temp = input.substr(startIndex + 1, CounterForClosingCommands - 1);
 			CounterForClosingCommands = 0;
 			calculate(temp);
+
+
 		}
+		
 	}
 
 }

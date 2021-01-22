@@ -14,7 +14,7 @@ private:
     bool lastCommandOpenning;
     int isThereError;
     string input;
-    void calculate(const string& temp);
+    void calculate(string& temp);
 
 public:
     Parser();
