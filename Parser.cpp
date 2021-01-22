@@ -410,13 +410,23 @@ void Parser::calculate(string& temp)
 				i++;
 				needsToBreak = true;
 			}
-
+			if (counterForAttrubutes==0)
+			{
+				errorCheck(1);
+			}
 			attribute = commandTop.substr(startingIndexForAttributes, counterForAttrubutes);
 			commands.top() = commandTop.substr(0, commands.top().size() - 3 - counterForAttrubutes);
 
 			if (needsToBreak == true)
 			{
 				break;
+			}
+		}
+		else
+		{
+			if (commandTop=="SRT-SLC"||commandTop=="SRT-ORD"||commandTop=="MAP-INC"|| commandTop=="MAP-MLT")
+			{
+				errorCheck(1);
 			}
 		}
 	}
