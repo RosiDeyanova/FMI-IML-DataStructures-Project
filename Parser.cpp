@@ -3,7 +3,7 @@
 Parser::Parser()
 {
 	lastCommandOpenning = false;
-	isThereError = 0;
+	
 
 }
 bool Parser::read(const string& filename)
@@ -120,7 +120,7 @@ int countDigits(std::string line)
 	}
 	return count;
 }
-string applyCommand(vector<double>numbersArray, string temp, string attribute, int attributeINT, string result, int isThereError)
+string applyCommand(vector<double>numbersArray, string temp, string attribute, int attributeINT, string result)
 {
 	
 
@@ -326,7 +326,7 @@ string applyCommand(vector<double>numbersArray, string temp, string attribute, i
 	}
 	return result;
 }
-vector<double> addNumsToVector(stack <string>numbers, int counterDigits, string singleNum, int arrayCount, int isThereError) {
+vector<double> addNumsToVector(stack <string>numbers, int counterDigits, string singleNum, int arrayCount) {
 
 	string lenght = numbers.top();
 	int lenghtLenght = lenght.length();
@@ -358,7 +358,7 @@ vector<double> addNumsToVector(stack <string>numbers, int counterDigits, string 
 
 		}
 		size_t i = 0;
-		if (singleNum[i] == '-')
+		if (singleNum[i] == '-') // проверява легитимността на число ако или ако не е отрицателно(дробно)
 		{
 			i++;
 		}
@@ -438,27 +438,28 @@ void Parser::calculate(string& temp)
 		{
 			numbers.pop();
 			commands.pop();
+			lastCommandOpenning = false;
 			return;
 			
 		}
-		vector<double>numbersArray = addNumsToVector(numbers, counterDigits, singleNum, arrayCount, isThereError);
+		vector<double>numbersArray = addNumsToVector(numbers, counterDigits, singleNum, arrayCount);
 
 		bool isThereFalseTag = false;
 		vector<string>tags{ "MAP-INC","MAP-MLT","AGG-SUM","AGG-PRO","AGG-AVG","AGG-FST","AGG-LST","SRT-REV","SRT-ORD","SRT-SLC", "SRT-DST" };
 
 		if (!(std::count(tags.begin(), tags.end(), temp)))
 		{
-			isThereError = 1;
-			errorCheck(isThereError);
+			
+			errorCheck(1);
 		}
 
 		if ((temp == "AGG-SUM" || temp == "AGG-PRO" || temp == "AGG-AVG") && numbersArray.size() < 2)
 		{
-			isThereError = 4;
-			errorCheck(isThereError);
+			
+			errorCheck(4);
 		}
 		string result;
-		result = applyCommand(numbersArray, temp, attribute, attributeINT, result, isThereError);
+		result = applyCommand(numbersArray, temp, attribute, attributeINT, result);
 
 
 		numbers.pop();
@@ -480,8 +481,8 @@ void Parser::calculate(string& temp)
 	}
 	else
 	{
-		isThereError = 1;
-		errorCheck(isThereError);
+	
+		errorCheck(1);
 	}
 }
 void Parser::lexer()
@@ -569,6 +570,8 @@ void Parser::lexer()
 
 
 		}
+	
+	
 		
 	}
 
